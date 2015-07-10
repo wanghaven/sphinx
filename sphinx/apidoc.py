@@ -50,6 +50,17 @@ def makename(package, module):
         name = module
     return name
 
+def makename_pretty(package, module):
+    """Join package and module with a space."""
+    # Both package and module can be None/empty.
+    if package:
+        name = package.capitalize()
+        if module:
+            name += ' ' + module.capitalize()
+    else:
+        name = module.capitalize()
+    return name
+
 
 def write_file(name, text, opts):
     """Write the output file for module/package <name>."""
@@ -90,12 +101,13 @@ def create_module_file(package, module, opts):
         text = ''
     # text += format_heading(2, ':mod:`%s` Module' % module)
     text += format_directive(module, package)
+    text += "merpuuuuuu"
     write_file(makename(package, module), text, opts)
 
 
 def create_package_file(root, master_package, subroot, py_files, opts, subs):
     """Build the text of the file and write the file."""
-    text = format_heading(1, '%s package' % makename(master_package, subroot))
+    text = format_heading(1, '%s Package' % makename_pretty(master_package, subroot))
 
     if opts.modulefirst:
         text += format_directive(subroot, master_package)
@@ -115,7 +127,7 @@ def create_package_file(root, master_package, subroot, py_files, opts, subs):
                if not shall_skip(path.join(root, sub), opts) and
                sub != INITPY]
     if submods:
-        text += format_heading(2, 'Submodules')
+        #text += format_heading(2, 'Submodules')
         if opts.separatemodules:
             text += '.. toctree::\n\n'
             for submod in submods:
@@ -132,9 +144,9 @@ def create_package_file(root, master_package, subroot, py_files, opts, subs):
                 write_file(modfile, filetext, opts)
         else:
             for submod in submods:
-                modfile = makename(master_package, makename(subroot, submod))
+                modfile = makename_pretty(subroot, submod)
                 if not opts.noheadings:
-                    text += format_heading(2, '%s module' % modfile)
+                    text += format_heading(2, '%s Module' % modfile)
                 text += format_directive(makename(subroot, submod),
                                          master_package)
                 text += '\n'
