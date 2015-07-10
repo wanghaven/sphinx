@@ -7,6 +7,7 @@ git clone https://github.com/sphinx-doc/sphinx.git
 
 #download and replace their apidoc.py with mine
 cd sphinx/sphinx/
+rm apidoc.py
 wget https://github.com/wanghaven/sphinx/raw/master/sphinx/apidoc.py
 
 #install sphinx
@@ -19,7 +20,7 @@ echo "Follow instructions to get Sphinx set up. You may stick with the default s
 sphinx-quickstart
 
 #add path to where we reference the modules from to conf.py
-echo "sys.path.insert(0, os.path.abspath('../../'))" >> source/conf.py
+echo "sys.path.insert(0, os.path.abspath('../../'))" >> conf.py
 
 #run sphinx-apidoc
 sphinx-apidoc --force --module-first -o ./ ../waldo
