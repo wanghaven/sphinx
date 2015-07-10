@@ -27,6 +27,7 @@ sphinx-apidoc --force --module-first -o ./ ../waldo
 
 #link all rst files to index.rst
 sed -i '' '/maxdepth/ a\
+\
 \ \ \ waldo
 ' index.rst
 
