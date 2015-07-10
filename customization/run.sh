@@ -22,5 +22,13 @@ sphinx-quickstart
 echo "sys.path.insert(0, os.path.abspath('../../'))" >> source/conf.py
 
 #run sphinx-apidoc
-sphinx-apidoc --force --module-first -o source/ ../waldo
+sphinx-apidoc --force --module-first -o ./ ../waldo
+
+#link all rst files to index.rst
+sed -i '' '/maxdepth/ a\
+\ \ \ waldo
+' index.rst
+
+#build the html files
+make html
 
