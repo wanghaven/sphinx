@@ -19,6 +19,9 @@ cd ../
 echo "Follow instructions to get Sphinx set up. You may stick with the default selections for the entries, but just be sure to say YES to getting the autodoc extension."
 sphinx-quickstart
 
+#let's go ahead and delete sphinx directory to minimze clutter
+rm -rf sphinx/
+
 #add path to where we reference the modules from to conf.py
 echo "sys.path.insert(0, os.path.abspath('../'))" >> conf.py
 
@@ -30,6 +33,10 @@ sed -i '' '/maxdepth/ a\
 \
 \ \ \ waldo
 ' index.rst
+
+#for now while its waldo specific, deleting test modules
+sed -i '' '/test/d' waldo.rst
+find . -type f -name waldo.tests\* -exec rm {} \;
 
 #build the html files
 make html
