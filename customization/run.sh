@@ -1,5 +1,40 @@
 #! /bin/bash
 
+#!/bin/bash
+# Use > 1 to consume two arguments per pass in the loop (e.g. each
+# argument has a corresponding value to go with it).
+# Use > 0 to consume one or more arguments per pass in the loop (e.g.
+# some arguments don't have a corresponding value to go with it such
+# as in the --default example).
+while [[ $# > 0 ]] ; do
+	opt="$1"
+	case $opt in
+	    -n|--name) 
+			NAME="$2"; shift;;
+	    -d|--destination)
+	    	DESTINATION="$2"; shift;;
+	    -s|--source)
+	    	SOURCE="$2"; shift;;
+	    --default)
+	    	DEFAULT=YES;;
+	    *)
+	    	echo "ERROR: Invalid option: \""$opt"\"" >&2
+	    	exit 1;;
+	esac
+	shift
+done
+
+if [[ "$NAME" == ""]]; then
+    echo "ERROR: Option -n requires an argument for project name." >&2
+    exit 1
+fi
+echo SOURCE  = "${SOURCE}"
+
+if [[ -n $1 ]]; then
+    echo "Last line of file specified as non-opt/last argument:"
+    tail -1 $1
+fi
+
 #download Sphinx into a docs directory
 mkdir docs/
 cd docs/
@@ -26,17 +61,17 @@ rm -rf sphinx/
 echo "sys.path.insert(0, os.path.abspath('../'))" >> conf.py
 
 #run sphinx-apidoc
-sphinx-apidoc --force --module-first -o ./ ../waldo
+sphinx-apidoc --force --module-first -o ./ ../$NAME
 
 #link all rst files to index.rst
 sed -i '' '/maxdepth/ a\
 \
-\ \ \ waldo
+\ \ \ $NAME
 ' index.rst
 
-#for now while its waldo specific, deleting test modules
-sed -i '' '/test/d' waldo.rst
-find . -type f -name waldo.tests\* -exec rm {} \;
+#delete anything we can find involving test modules
+sed -i '' '/test/d' ${NAME}.rst
+find . -type f -name ${NAME}.tests\* -exec rm {} \;
 
 #build the html files
 make html
