@@ -63,11 +63,9 @@ echo "sys.path.insert(0, os.path.abspath('../'))" >> conf.py
 #run sphinx-apidoc
 sphinx-apidoc --force --module-first -o ./ ../$NAME
 
-#link all rst files to index.rst
-sed -i '' "/maxdepth/ a\
-\
-\ \ \ "${NAME}"
-" index.rst
+#set index.rst to what's in modules.rst
+mv modules.rst index.rst
+sed -i '' 's/4/2' index.rst
 
 #delete anything we can find involving test modules
 sed -i '' '/test/d' ${NAME}.rst
