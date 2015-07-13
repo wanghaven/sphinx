@@ -12,7 +12,11 @@ while [[ $# > 0 ]] ; do
 	    -n|--name) 
 			NAME="$2"; shift;;
 	    -d|--destination)
-	    	DESTINATION="$2"; shift;;
+			case "$2" in
+				"") DESTINATION='docs';;
+				*) DESTINATION="$2";;
+			esac
+	    	shift;;
 	    -s|--source)
 	    	SOURCE="$2"; shift;;
 	    --default)
@@ -28,7 +32,7 @@ if [[ "$NAME" == "" ]]; then
     echo "ERROR: Option -n requires an argument for project name." >&2
     exit 1
 fi
-echo SOURCE  = "${SOURCE}"
+echo DESTINATION = "${DESTINATION}"
 
 if [[ -n $1 ]]; then
     echo "Last line of file specified as non-opt/last argument:"
@@ -36,8 +40,8 @@ if [[ -n $1 ]]; then
 fi
 
 #download Sphinx into a docs directory
-mkdir docs/
-cd docs/
+mkdir $DESTINATION
+cd $DESTINATION
 git clone https://github.com/sphinx-doc/sphinx.git
 
 #download and replace their apidoc.py with mine
@@ -65,7 +69,7 @@ sphinx-apidoc --force --module-first -o ./ ../$NAME
 
 #set index.rst to what's in modules.rst
 mv modules.rst index.rst
-sed -i '' 's/4/2' index.rst
+sed -i '' 's/4/2/' index.rst
 
 #delete anything we can find involving test modules
 sed -i '' '/test/d' ${NAME}.rst
