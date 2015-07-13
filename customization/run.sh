@@ -19,7 +19,7 @@ while [[ $# > 0 ]] ; do
 	    	echo "-h, --help : Displays this output"
 	    	echo "-n, --name : REQUIRED. Name of the project"
 	    	echo "-d, -destination: Name of the directory to contain files needed for documentation. Set to /docs/ by default."
-	    	shift;;
+	    	exit 0;;
 	    --default)
 	    	DEFAULT=YES;;
 	    *)
