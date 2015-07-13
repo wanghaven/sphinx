@@ -66,7 +66,7 @@ sphinx-apidoc --force --module-first -o ./ ../$NAME
 #link all rst files to index.rst
 sed -i '' '/maxdepth/ a\
 \
-\ \ \ $NAME
+\ \ \ "${NAME}"
 ' index.rst
 
 #delete anything we can find involving test modules
