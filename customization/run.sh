@@ -14,6 +14,7 @@ while [[ $# > 0 ]] ; do
 	    -d|--destination)
 			case "$2" in
 				"") DESTINATION='docs';;
+				[[ "$2" =~ ^-{1,2}.* ]]) 'docs';;
 				*) DESTINATION="$2"; shift;;
 			esac;;
 	    -s|--source)
