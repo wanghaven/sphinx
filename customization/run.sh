@@ -10,13 +10,12 @@ while [[ $# > 0 ]] ; do
 	opt="$1"
 	case $opt in
 	    -n|--name) 
-			NAME="$2"; shift;;
+			NAME="$2"; shift ;;
 	    -d|--destination)
 			case "$2" in
 				"") DESTINATION='docs';;
-				*) DESTINATION="$2";;
+				*) DESTINATION="$2"; shift;;
 			esac
-	    	shift;;
 	    -s|--source)
 	    	SOURCE="$2"; shift;;
 	    --default)
