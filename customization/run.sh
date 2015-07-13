@@ -9,13 +9,10 @@
 while [[ $# > 0 ]] ; do
 	opt="$1"
 	case $opt in
-	    -n|--name) 
-			NAME="$2"; shift ;;
+	    -n|--name)
+			NAME="$2"; shift;;
 	    -d|--destination)
-			case "$2" in
-				""|-*|--*) DESTINATION='docs';;
-				*) DESTINATION="$2"; shift;;
-			esac;;
+			DESTINATION="$2"; shift;;
 	    -s|--source)
 	    	SOURCE="$2"; shift;;
 	    --default)
@@ -31,7 +28,10 @@ if [[ "$NAME" == "" ]]; then
     echo "ERROR: Option -n requires an argument for project name." >&2
     exit 1
 fi
-echo DESTINATION = "${DESTINATION}"
+
+if [[ "$DESTINATION" == "" ]]; then
+    echo "INFO: Option -d has either been unspecified or supplied no argument. Documentation source folder will be set to /docs/ by default." 
+fi
 
 if [[ -n $1 ]]; then
     echo "Last line of file specified as non-opt/last argument:"
