@@ -24,7 +24,7 @@ while [[ $# > 0 ]] ; do
 	shift
 done
 
-if [[ "$NAME" == ""]]; then
+if [[ "$NAME" == "" ]]; then
     echo "ERROR: Option -n requires an argument for project name." >&2
     exit 1
 fi
