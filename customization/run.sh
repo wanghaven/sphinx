@@ -15,7 +15,7 @@ while [[ $# > 0 ]] ; do
 			case "$2" in
 				"") DESTINATION='docs';;
 				*) DESTINATION="$2"; shift;;
-			esac
+			esac;;
 	    -s|--source)
 	    	SOURCE="$2"; shift;;
 	    --default)
