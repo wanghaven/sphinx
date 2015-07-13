@@ -13,8 +13,13 @@ while [[ $# > 0 ]] ; do
 			NAME="$2"; shift;;
 	    -d|--destination)
 			DESTINATION="$2"; shift;;
-	    -s|--source)
-	    	SOURCE="$2"; shift;;
+	    -h|--help)
+	    	echo "usage: ./run.sh [OPTIONS] [ARGUMENTS]"
+	    	echo "=====OPTIONS====="
+	    	echo "-h, --help : Displays this output"
+	    	echo "-n, --name : REQUIRED. Name of the project"
+	    	echo "-d, -destination: Name of the directory to contain files needed for documentation. Set to /docs/ by default."
+	    	shift;;
 	    --default)
 	    	DEFAULT=YES;;
 	    *)
