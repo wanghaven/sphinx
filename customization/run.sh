@@ -36,6 +36,7 @@ fi
 
 if [[ "$DESTINATION" == "" ]]; then
     echo "INFO: Option -d has either been unspecified or supplied no argument. Documentation source folder will be set to /docs/ by default." 
+    DESTINATION="docs"
 fi
 
 if [[ -n $1 ]]; then
