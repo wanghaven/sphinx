@@ -89,6 +89,7 @@ if [[ "$QUICKSTART" = true ]]; then
 	sphinx-quickstart
 else
 	sphinx-quickstart -p $PROJECT -a $AUTHOR -v $VERSION --ext-autodoc --ext-doctest --ext-intersphinx --quiet
+fi
 
 #Sphinx's conf.py needs to know where to find the project modules from
 echo "sys.path.insert(0, os.path.abspath('../'))" >> conf.py
