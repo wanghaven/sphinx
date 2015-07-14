@@ -32,7 +32,7 @@ while [[ $# > 0 ]] ; do
 	    	exit 0;;
 	    *)
 	    	echo "ERROR: Invalid option: \""$opt"\"" 
-	    	echo "run `./run.sh --help` to see usage.">&2
+	    	echo "run './run.sh --help' to see usage.">&2
 	    	exit 1;;
 	esac
 	shift
