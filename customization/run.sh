@@ -13,9 +13,9 @@ while [[ $# > 0 ]] ; do
 	    -d|--destination)
 			DESTINATION="$2"; shift;;
 		-f|--force-install)
-			FORCEINSTALL = true;;
+			FORCEINSTALL=true;;
 		-q|--quickstart)
-			QUICKSTART = true;;
+			QUICKSTART=true;;
 	    -h|--help)
 	    	echo "usage: ./run.sh [OPTIONS] [ARGUMENTS]"; echo
 	    	echo "Simplest (and recommended usage) is to run `./run.sh -f -p PROJECT -a AUTHOR -v VERSION`"
