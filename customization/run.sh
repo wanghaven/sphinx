@@ -51,7 +51,7 @@ if [[ "$DESTINATION" == "" ]]; then
 fi
 
 # if --quickstart option isn't specified, then in order to run sphinx-quickstart automatically we need author and version info
-if [[ "QUICKSTART" = "" ]] -a [[ "$AUTHOR" == "" || "$VERSION" == "" ]]; then
+if [[ "QUICKSTART" = "" ]] && [[ "$AUTHOR" == "" || "$VERSION" == "" ]]; then
 	echo "ERROR: sphinx-quickstart requires the author(s) and version for the project. Please either provide this information now, or run the script with the '--quickstart' option to supply this yourself later on." >&2
 	exit 1
 fi
