@@ -21,6 +21,7 @@ while [[ $# > 0 ]] ; do
 	    	echo "-h, --help : Displays this output"
 	    	echo "-n, --name : REQUIRED. Name of the project directory where the code lives"
 	    	echo "-d, -destination: Name of the directory to contain files needed for documentation. Set to /docs/ by default."
+	    	echo "-f, --force-install: Enables forced installation and possible overwrite of an existing Sphinx directory."
 	    	exit 0;;
 	    --default)
 	    	DEFAULT=YES;;
