@@ -1,11 +1,6 @@
 #! /bin/bash
 
-#!/bin/bash
-# Use > 1 to consume two arguments per pass in the loop (e.g. each
-# argument has a corresponding value to go with it).
-# Use > 0 to consume one or more arguments per pass in the loop (e.g.
-# some arguments don't have a corresponding value to go with it such
-# as in the --default example).
+# allow arguments to be supplied
 while [[ $# > 0 ]] ; do
 	opt="$1"
 	case $opt in
@@ -23,8 +18,6 @@ while [[ $# > 0 ]] ; do
 	    	echo "-d, -destination: Name of the directory to contain files needed for documentation. Set to /docs/ by default."
 	    	echo "-f, --force-install: Enables forced installation and possible overwrite of an existing Sphinx directory."
 	    	exit 0;;
-	    --default)
-	    	DEFAULT=YES;;
 	    *)
 	    	echo "ERROR: Invalid option: \""$opt"\"" 
 	    	echo "run `./run.sh --help` to see usage.">&2
@@ -33,16 +26,19 @@ while [[ $# > 0 ]] ; do
 	shift
 done
 
+# name argument is required. will fail with error if not supplied
 if [[ "$NAME" == "" ]]; then
     echo "ERROR: Option -n requires an argument for project name." >&2
     exit 1
 fi
 
+# destination will be set to /docs/ as default if not supplied
 if [[ "$DESTINATION" == "" ]]; then
     echo "INFO: Option -d has either been unspecified or supplied no argument. Documentation source folder will be set to /docs/ by default." 
     DESTINATION="docs"
 fi
 
+# check if an input remains
 if [[ -n $1 ]]; then
     echo "Last line of file specified as non-opt/last argument:"
     tail -1 $1
@@ -65,19 +61,17 @@ cd sphinx/sphinx/
 rm apidoc.py
 wget https://github.com/wanghaven/sphinx/raw/master/sphinx/apidoc.py
 
-#install sphinx
+#install and start up sphinx
 cd ../
 pip install --upgrade .
-
-#run sphinx-quickstart
 cd ../
-echo "Follow instructions to get Sphinx set up. You may stick with the default selections for the entries, but just be sure to say YES to getting the autodoc extension."
+echo "NOTE: Follow instructions to get Sphinx set up. You may stick with the default selections for the entries, but just be sure to say YES to getting the autodoc extension."
 sphinx-quickstart
 
-#add path to where we reference the modules from to conf.py
+#Sphinx's conf.py needs to know where to find the project modules from
 echo "sys.path.insert(0, os.path.abspath('../'))" >> conf.py
 
-#run sphinx-apidoc
+#sphinx-apidoc autogenerates the .rst files from the project structure
 sphinx-apidoc --force --module-first -o ./ ../$NAME
 
 #let's go ahead and delete sphinx directory to minimze clutter
