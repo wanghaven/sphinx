@@ -18,7 +18,7 @@ while [[ $# > 0 ]] ; do
 			QUICKSTART=true;;
 	    -h|--help)
 	    	echo "usage: ./run.sh [OPTIONS] [ARGUMENTS]"; echo
-	    	echo "Simplest (and recommended usage) is to run `./run.sh -f -p PROJECT -a AUTHOR -v VERSION`"
+	    	echo "Simplest (and recommended usage) is to run './run.sh -f -p PROJECT -a AUTHOR -v VERSION'"
 	    	echo "Note: please use the -f option carefully, it will overwrite an existing sphinx directory if needed."
 	    	echo
 	    	echo "=====OPTIONS====="
