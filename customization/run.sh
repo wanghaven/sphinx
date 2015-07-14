@@ -40,7 +40,7 @@ done
 
 # project argument is required. will fail with error if not supplied
 if [[ "$PROJECT" == "" ]]; then
-    echo "ERROR: Option -n requires an argument for project name." >&2
+    echo "ERROR: Option -p/--project requires an argument for project name." >&2
     exit 1
 fi
 
@@ -70,7 +70,7 @@ cd $DESTINATION
 if [ ! -d "sphinx" -o "$FORCEINSTALL" = true ]; then
 	git clone https://github.com/sphinx-doc/sphinx.git
 else
-	echo "WARNING: sphinx directory already exists here. If you wish to overwrite existing directory, execute the script using the '--force-install' option." >&2
+	echo "WARNING: sphinx directory already exists in directory ${DESTINATION}. If you wish to overwrite existing directory, execute the script using the '--force-install' option." >&2
 	exit 1
 fi
 
